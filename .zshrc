@@ -12,6 +12,8 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+eval "$(rbenv init -)"
+
 setopt CORRECT CORRECT_ALL
 COMPLETION_WAITING_DOTS=true
 DISABLE_UPDATE_PROMPT=true
