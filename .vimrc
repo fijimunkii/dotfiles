@@ -3,12 +3,6 @@ let maplocalleader = "\\"
 set nocompatible
 filetype off
 set noesckeys
-" for problem with ncurses from 10.6
-inoremap OA <esc><right><up>i
-inoremap OB <esc><right><down>i
-inoremap OD <esc>i
-inoremap OC <esc><right>a
-
 " Load Vundle
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
@@ -18,6 +12,7 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-rails.git'
+Bundle 'tpope/vim-markdown'
 Bundle 'corntrace/bufexplorer'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'L9'
@@ -38,6 +33,9 @@ Bundle 'mattn/gist-vim'
 Bundle 'sjl/gundo.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'jamessan/vim-gnupg'
+Bundle 'mustache/vim-mustache-handlebars'
+Bundle 'heartsentwined/vim-emblem'
+Bundle 'Shutnik/jshint2.vim'
 
 " Colorscheme
 colorscheme wombat256mod
@@ -47,6 +45,9 @@ set title titlestring=
 
 " Syntax Hilighting
 syntax on
+
+" Dont synhilight to infinity
+set synmaxcol=250
 
 " Indentation Settings
 set smartindent
@@ -121,6 +122,10 @@ nnoremap <silent> <C-N> :se invhlsearch<CR>
 
 " Search as you type
 set incsearch
+
+" Ctrl-\ to run JSHint
+noremap <C-\> :JSHint<CR>
+inoremap <C-\> <Esc>:JSHint<CR>
 
 " Ctrl-T to toggle NerdTree
 noremap <C-t> :NERDTreeTabsToggle<CR>
