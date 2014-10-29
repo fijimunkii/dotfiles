@@ -149,7 +149,7 @@ set relativenumber
 set ruler
 
 " Ignore Files
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildignore+=*.swp
 
 " when used with vim -u, disable local .vimrc
 set nocompatible
@@ -165,3 +165,6 @@ noremap! <Esc>O[ <C-c>
 
 " Set Statusline
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+
+" Show hidden files by default in nerdtree
+let NERDTreeShowHidden=1
