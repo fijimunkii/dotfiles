@@ -32,12 +32,6 @@ Bundle 'mustache/vim-mustache-handlebars'
 Bundle 'heartsentwined/vim-emblem'
 Bundle 'Shutnik/jshint2.vim'
 
-let mapleader = ","
-let maplocalleader = "\\"
-set nocompatible
-filetype off
-set noesckeys
-
 " Colorscheme
 colorscheme wombat256mod
 
@@ -148,6 +142,25 @@ set ruler
 
 " Ignore Files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+
+" define mapleader
+let mapleader = ","
+let maplocalleader = "\\"
+
+" when used with vim -u, disable local .vimrc
+set nocompatible
+
+" filetype detection
+filetype on
+
+" ESCape key stuff
+" disable 0[ recognition in insert mode
+set noesckeys
+" speed up normal escape key
+let &t_ti.="\e[?7727h"
+let &t_te.="\e[?7727l"
+noremap <Esc>O[ <Esc>
+noremap! <Esc>O[ <C-c>
 
 " Set Statusline
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
