@@ -1,4 +1,5 @@
 " Load Vundle
+filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
@@ -31,6 +32,13 @@ Bundle 'jamessan/vim-gnupg'
 Bundle 'mustache/vim-mustache-handlebars'
 Bundle 'heartsentwined/vim-emblem'
 Bundle 'Shutnik/jshint2.vim'
+
+" re-enable stuff after vundle
+filetype plugin indent on
+
+" define mapleader
+let mapleader = ","
+let maplocalleader = "\\"
 
 " Colorscheme
 colorscheme wombat256mod
@@ -143,15 +151,8 @@ set ruler
 " Ignore Files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
-" define mapleader
-let mapleader = ","
-let maplocalleader = "\\"
-
 " when used with vim -u, disable local .vimrc
 set nocompatible
-
-" filetype detection
-filetype on
 
 " ESCape key stuff
 " disable 0[ recognition in insert mode
