@@ -1,8 +1,3 @@
-let mapleader = ","
-let maplocalleader = "\\"
-set nocompatible
-filetype off
-set noesckeys
 " Load Vundle
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
@@ -37,11 +32,14 @@ Bundle 'mustache/vim-mustache-handlebars'
 Bundle 'heartsentwined/vim-emblem'
 Bundle 'Shutnik/jshint2.vim'
 
+let mapleader = ","
+let maplocalleader = "\\"
+set nocompatible
+filetype off
+set noesckeys
+
 " Colorscheme
 colorscheme wombat256mod
-
-" Sets title
-set title titlestring=
 
 " Syntax Hilighting
 syntax on
@@ -63,7 +61,7 @@ vnoremap <C-x> "+c
 vnoremap <C-v> c<ESC>"+p
 inoremap <C-v> <ESC>"+pa
 
-" Allow saving of files as sudo when I forgot to start vim using sudo
+" Allow saving of files as sudo
 cmap w!! w !sudo tee > /dev/null %
 
 " ctrl-f to recursively search files
@@ -77,9 +75,6 @@ let g:gundo_preview_height = 22
 noremap ,c :cd ~/code<cr>
 noremap ; :
 noremap : ;
-
-" Disable regular escape
-inoremap <Esc> <nop>
 
 " jj to escape
 inoremap jj <Esc>
