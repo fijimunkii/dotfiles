@@ -18,6 +18,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-repeat'
 Bundle 'emnh/taglist.vim'
 Bundle 'godlygeek/csapprox'
 Bundle 'vim-scripts/Colour-Sampler-Pack'
@@ -32,6 +33,7 @@ Bundle 'jamessan/vim-gnupg'
 Bundle 'mustache/vim-mustache-handlebars'
 Bundle 'heartsentwined/vim-emblem'
 Bundle 'Shutnik/jshint2.vim'
+Bundle 'tmhedberg/matchit'
 
 " re-enable stuff after vundle
 filetype plugin indent on
