@@ -4,15 +4,13 @@ export EDITOR='vim'
 
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="agnoster"
-
 plugins=(
   brew brew-cask dirhistory torrent git git-remote-branch 
   battery colored-man colorize
 )
-
+# cd ~/.oh-my-zsh && git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/oh-my-zsh.sh
-
-eval "$(rbenv init -)"
 
 setopt CORRECT CORRECT_ALL
 COMPLETION_WAITING_DOTS=true
