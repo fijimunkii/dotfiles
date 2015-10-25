@@ -1,46 +1,53 @@
 " Load Vundle
-filetype off
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " Vundles
-Bundle 'gmarik/vundle'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-sensible'
-Bundle 'tpope/vim-rails.git'
-Bundle 'tpope/vim-markdown'
-Bundle 'corntrace/bufexplorer'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'L9'
-Bundle 'FuzzyFinder'
-Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-repeat'
-Bundle 'emnh/taglist.vim'
-Bundle 'godlygeek/csapprox'
-Bundle 'vim-scripts/Colour-Sampler-Pack'
-Bundle 'vim-scripts/ScrollColors'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'mhinz/vim-startify'
-Bundle 'mattn/webapi-vim'
-Bundle 'mattn/gist-vim'
-Bundle 'sjl/gundo.vim'
-Bundle 'mileszs/ack.vim'
-Bundle 'jamessan/vim-gnupg'
-Bundle 'mustache/vim-mustache-handlebars'
-Bundle 'heartsentwined/vim-emblem'
-Bundle 'Shutnik/jshint2.vim'
-Bundle 'tmhedberg/matchit'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-rails.git'
+Plugin 'tpope/vim-markdown'
+Plugin 'corntrace/bufexplorer'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'L9'
+Plugin 'FuzzyFinder'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+"Plugin 'Xuyuanp/nerdtree-git-plugin'
+"Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'emnh/taglist.vim'
+Plugin 'godlygeek/csapprox'
+Plugin 'vim-scripts/Colour-Sampler-Pack'
+Plugin 'vim-scripts/ScrollColors'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'mhinz/vim-startify'
+Plugin 'mattn/webapi-vim'
+Plugin 'mattn/gist-vim'
+Plugin 'sjl/gundo.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'jamessan/vim-gnupg'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'heartsentwined/vim-emblem'
+Plugin 'Shutnik/jshint2.vim'
+Plugin 'tmhedberg/matchit'
+Plugin 'christoomey/vim-run-interactive'
+Plugin 'itchyny/screensaver.vim'
+Plugin 'digitaltoad/vim-jade'
 
 " re-enable stuff after vundle
+call vundle#end()
 filetype plugin indent on
 
 " define mapleader
 let mapleader = ","
 let maplocalleader = "\\"
+
+" fix for zshenv not working for :!
+set shell=zsh\ -i
 
 " Colorscheme
 colorscheme wombat256mod
@@ -67,6 +74,9 @@ inoremap <C-v> <ESC>"+pa
 
 " Allow saving of files as sudo
 cmap w!! w !sudo tee > /dev/null %
+
+" <leader> r to run a shell command
+nnoremap <leader>r :RunInInteractiveShell<space>
 
 " ctrl-f to recursively search files
 nnoremap <C-f> :Ack
@@ -101,9 +111,9 @@ inoremap <C-l> <Esc>2li
 " space goes to insert mode
 nnoremap <Space> i
 
-" - & _ move lines around
-noremap - ddp
-noremap _ ddkkp
+" CTRL - & CTRL _ move lines around
+noremap <C--> ddp
+noremap <C-_> ddkkp
 
 " > and < indent and unindent
 nnoremap > >>
@@ -127,8 +137,8 @@ noremap <C-\> :JSHint<CR>
 inoremap <C-\> <Esc>:JSHint<CR>
 
 " Ctrl-T to toggle NerdTree
-noremap <C-t> :NERDTreeTabsToggle<CR>
-inoremap <C-t> <Esc>:NERDTreeTabsToggle<CR>
+noremap <C-t> :NERDTreeToggle<CR>
+inoremap <C-t> <Esc>:NERDTreeToggle<CR>
 
 " Switch between windows, maximizing the current window
 nnoremap <C-J> <C-W>j<C-W>_ 
