@@ -2,26 +2,20 @@
 bindkey -v
 export EDITOR='vim'
 
+HIST_IGNORE_SPACE=true
+
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="agnoster"
 plugins=(
-  brew brew-cask dirhistory torrent git git-remote-branch 
-  battery colored-man colorize
+  brew dirhistory torrent git battery colorize pass
 )
 # cd ~/.oh-my-zsh && git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
 source $ZSH/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/oh-my-zsh.sh
 
-setopt CORRECT CORRECT_ALL
+setopt CORRECT
 COMPLETION_WAITING_DOTS=true
 DISABLE_UPDATE_PROMPT=true
-
-# sets the title
-case $TERM in
-  xterm*)
-  precmd () {print -Pn "\e]0;%n@%m: %~\a"}
-  ;;
-esac
 
 # Loads J
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
@@ -33,9 +27,15 @@ function collapse_pwd {
 
 # sets prompt character
 function prompt_char {
-  git branch >/dev/null 2>/dev/null && echo '±' && return
+  git branch >/dev/null 2>/dev/null && echo '𐂃͠ ' && return
   hg root >/dev/null 2>/dev/null && echo '☿' && return
   echo '>'
+}
+
+function history_num {
+  LINE_NUM=$(history | wc -l | sed 's: ::g')
+  ((LINE_NUM++))
+  echo "[${LINE_NUM}]"
 }
 
 # echoes hostname
@@ -54,65 +54,37 @@ function prompt_dir { echo "%{$fg_bold[green]%}$(collapse_pwd)%{$reset_color%}" 
 
 PROMPT='
 $(prompt_user) at $(prompt_machine) in $(prompt_dir) $(git_prompt_info)
-$(virtualenv_info)$(prompt_char) '
+$(history_num) $(virtualenv_info)$(prompt_char) '
 
-RPROMPT='$(battery_pct_remaining)'
-
-function precompile
-{
-    bundle exec rake assets:precompile; \
-      git add --all .; git commit -m $1;
-}
-
-function install
-{
-    if hash yum 2>/dev/null; then
-        sudo yum install $1; 
-    elif hash apt-get 2>/dev/null; then
-        sudo apt-get install $1;
-    elif hash brew 2>/dev/null; then
-        brew install $1;
-    fi
-}
+RPROMPT='$(battery_pct_remaining 2>/dev/null)'
 
 function passgen
 {
-  if hash xclip 2>/dev/null; then
-    head -c $1 /dev/urandom | base64 - | xclip -i;
-  elif hash pbcopy 2>/dev/null; then
-    head -c $1 /dev/urandom | base64 - | pbcopy;
-  elif hash gpm 2>/dev/null; then
-    head -c $1 /dev/urandom | base64 - | gpm;
-  fi
+  head -c 20 /dev/urandom | shasum -b -a 256 | xxd -r -p | base64
 }
 
-function rakeitgood
-{
-  rake db:drop;rake db:create;rake db:migrate;rake db:migrate RAILS_ENV=test; \
-    rake db:seed; rake db:seed RAILS_ENV=test;
-}
+# GPG 2.1.x SSH support
+# See : http://incenp.org/notes/2015/gnupg-for-ssh-authentication.html
+#export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 
-
-alias lyrics='sh ~/.config/pianobar/lyrics.sh'
-alias pushitgood='git push origin master; git push heroku master;'
-alias ll='ls -la'
-alias reload='source ~/.zshrc'
-alias pair='tmux new-session -s pair'
-alias mysql='/usr/local/Cellar/mysql/5.6.15/support-files/mysql.server start'
-alias sleep='osascript ~/Projects/automate/sleep.scpt'
-alias k='bundle exec kitchen'
-alias sasswatch='sass -w .:.'
-alias jailbreak='sudo xattr -rd com.apple.quarantine'
-alias viz='mpdviz -f /tmp/mpd.fifo -v lines -i true -d false'
 alias gap='git add --patch'
-alias ios='open /Applications/Xcode.app/Contents/Developer/Applications/iOS\ Simulator.app'
-alias npmreboot='rm -rf node_modules && npm cache clean && npm install'
 alias i='npm install';
 alias t='npm test';
 alias s='npm start';
-alias tw='npm run testwatch';
 alias gco='git checkout';
 alias gcob='git checkout -b';
 alias emptytrash='sudo rm -Rf ~/.Trash/*';
 alias shrug='echo "¯\_(ツ)_/¯"';
-alias teatime='sleep 240 && say "tea time!"';
+alias p='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend';
+alias rmhosts='rm ~/.ssh/known_hosts';
+
+alias kali='docker run -it --rm -w /data -v $(pwd):/data kalilinux/kali-rolling'
+
+export GOPATH="/Users/fijimunkii/go"
+export HOMEBREW_NO_ANALYTICS=1;
+#eval "$(ssh-agent -s)" >/dev/null
+#ssh-add -K ~/.ssh/id_rsa 2>/dev/null
+
+PATH="/Users/fijimunkii/Library/Python/3.7/bin:$PATH"
+PATH="/Users/fijimunkii/bin:$PATH"
+
